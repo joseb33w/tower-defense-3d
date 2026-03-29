@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Tower Defense 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-item">
+        <span class="hud-icon">🌊</span>
+        <span class="hud-label">WAVE</span>
+        <span id="wave" class="hud-val">0</span>
+      </div>
+      <div class="hud-item coins-item">
+        <span class="hud-icon">🪙</span>
+        <span class="hud-label">COINS</span>
+        <span id="coins" class="hud-val">100</span>
+      </div>
+      <div class="hud-item lives-item">
+        <span class="hud-icon">❤️</span>
+        <span class="hud-label">LIVES</span>
+        <span id="lives" class="hud-val">10</span>
+      </div>
+      <div class="hud-item score-item">
+        <span class="hud-icon">🏆</span>
+        <span class="hud-label">SCORE</span>
+        <span id="score" class="hud-val">0</span>
+      </div>
+    </div>
+
+    <!-- Turret Shop -->
+    <div id="turret-shop">
+      <div class="shop-turret selected" data-type="laser">
+        <div class="turret-preview laser-preview"></div>
+        <span class="turret-name">Laser</span>
+        <span class="turret-cost">🪙 25</span>
+      </div>
+      <div class="shop-turret" data-type="cannon">
+        <div class="turret-preview cannon-preview"></div>
+        <span class="turret-name">Cannon</span>
+        <span class="turret-cost">🪙 40</span>
+      </div>
+      <div class="shop-turret" data-type="freeze">
+        <div class="turret-preview freeze-preview"></div>
+        <span class="turret-name">Freeze</span>
+        <span class="turret-cost">🪙 35</span>
+      </div>
+      <div class="shop-turret" data-type="poison">
+        <div class="turret-preview poison-preview"></div>
+        <span class="turret-name">Poison</span>
+        <span class="turret-cost">🪙 30</span>
+      </div>
+    </div>
+
+    <!-- Wave Start -->
+    <button id="startWaveBtn" class="wave-btn">▶ START WAVE</button>
+
+    <!-- Upgrade Panel -->
+    <div id="upgradePanel" class="upgrade-panel hidden">
+      <div class="upgrade-content">
+        <div class="upgrade-header">
+          <span id="upgTurretName" class="upg-name">Laser Turret</span>
+          <span id="upgTurretLevel" class="upg-level">Lv 1</span>
+        </div>
+        <div class="upgrade-stats">
+          <div class="upg-stat"><span class="upg-label">Damage</span><span id="upgDmg" class="upg-val">10</span></div>
+          <div class="upg-stat"><span class="upg-label">Range</span><span id="upgRange" class="upg-val">3.0</span></div>
+          <div class="upg-stat"><span class="upg-label">Speed</span><span id="upgSpeed" class="upg-val">Fast</span></div>
+        </div>
+        <div class="upgrade-actions">
+          <button id="upgradeBtn" class="btn-upgrade">⬆ UPGRADE <span id="upgCost">50</span>🪙</button>
+          <button id="sellBtn" class="btn-sell">SELL <span id="sellPrice">15</span>🪙</button>
+        </div>
+        <button id="closeUpgrade" class="btn-close">✕</button>
+      </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="overlay-screen active">
+      <div class="screen-content">
+        <h1 class="game-title">TOWER<br>DEFENSE</h1>
+        <p class="game-title-sub">3D COMMANDER</p>
+        <p class="subtitle">Place turrets. Destroy waves. Defend your base at all costs.</p>
+        <button id="playBtn" class="btn-primary">DEPLOY</button>
+        <div class="instructions">
+          <p><span class="inst-icon">👆</span> Tap tiles to place turrets</p>
+          <p><span class="inst-icon">⬆️</span> Tap turrets to upgrade</p>
+          <p><span class="inst-icon">🌊</span> Survive endless waves</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave Announce -->
+    <div id="waveAnnounce" class="wave-announce hidden">
+      <span id="waveAnnounceText">WAVE 1</span>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameOverScreen" class="overlay-screen">
+      <div class="screen-content">
+        <h2 class="gameover-title">BASE DESTROYED</h2>
+        <div class="gameover-stats">
+          <div class="stat"><span class="stat-label">Waves Survived</span><span id="finalWave" class="stat-val">0</span></div>
+          <div class="stat"><span class="stat-label">Enemies Killed</span><span id="finalKills" class="stat-val">0</span></div>
+          <div class="stat"><span class="stat-label">Score</span><span id="finalScore" class="stat-val">0</span></div>
+          <div class="stat"><span class="stat-label">Best Wave</span><span id="bestWave" class="stat-val">0</span></div>
+        </div>
+        <button id="restartBtn" class="btn-primary">REDEPLOY</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/path.js"></script>
+  <script src="js/turrets.js"></script>
+  <script src="js/enemies.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
